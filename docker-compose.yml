@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+    postgresDB:
+        image: postgres
+        hostname: postgres
+        ports:
+            - '5432:5432'
+
+    api:
+        build: .
+        env_file:
+            - .env
+        environment:
+            WAIT_HOSTS: postgresDB:5432
+        ports:
+            - '8080:8080'
